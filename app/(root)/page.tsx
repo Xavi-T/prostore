@@ -1,4 +1,3 @@
-export default async function HomePage() {
-  await new Promise((resolve) => setTimeout(resolve, 2000))
+export default function HomePage() {
   return <div>hellow</div>
 }
