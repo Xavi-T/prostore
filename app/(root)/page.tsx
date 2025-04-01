@@ -1,8 +1,4 @@
-import { Button } from '@/components/ui/button'
-export default function HomePage() {
-  return (
-    <div>
-      <Button>Button</Button>
-    </div>
-  )
+export default async function HomePage() {
+  await new Promise((resolve) => setTimeout(resolve, 2000))
+  return <div>hellow</div>
 }

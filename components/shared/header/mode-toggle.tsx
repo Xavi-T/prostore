@@ -40,13 +40,6 @@ export default function ModeToggle() {
         <DropdownMenuSeparator />
         <DropdownMenuCheckboxItem
           className="cursor-pointer"
-          checked={theme === 'system'}
-          onClick={() => setTheme('system')}
-        >
-          System
-        </DropdownMenuCheckboxItem>
-        <DropdownMenuCheckboxItem
-          className="cursor-pointer"
           checked={theme === 'dark'}
           onClick={() => setTheme('dark')}
         >
