@@ -2,8 +2,9 @@ import { Card, CardContent, CardHeader } from '@/components/ui/card'
 import Image from 'next/image'
 import Link from 'next/link'
 import ProductPrice from './product-price'
+import { Product } from '@/types'
 
-function ProductCard({ product }: { product: any }) {
+function ProductCard({ product }: { product: Product }) {
   const { name, images, slug, rating, stock, price } = product
   return (
     <Card className="w-full max-w-xs">
