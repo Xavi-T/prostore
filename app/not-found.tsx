@@ -13,7 +13,7 @@ function NotFoundPage() {
         alt="logo"
         priority
       />
-      <div className="w-1/3 rounded-lg p-6 text-center shadow-md">
+      <div className="max-w-md rounded-lg p-6 text-center shadow-md">
         <h1 className="mb-4 text-3xl font-bold">Not Found</h1>
         <p className="text-destructive">Could not find requested page!</p>
         <Button
