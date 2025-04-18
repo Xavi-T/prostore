@@ -11,3 +11,10 @@ export const singInDefaultValues = {
   email: '',
   password: ''
 }
+
+export const singUpDefaultValues = {
+  name: '',
+  email: '',
+  password: '',
+  confirmPassword: ''
+}
