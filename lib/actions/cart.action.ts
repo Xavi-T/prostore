@@ -24,7 +24,7 @@ const calcPrice = (items: CartItem[]) => {
     totalPrice: totalPrice.toFixed(2)
   }
 }
-export async function addToCart(data: CartItem) {
+export async function addItemToCart(data: CartItem) {
   try {
     // check for cart cookies
     const sessionCartId = (await cookies()).get('sessionCartId')?.value

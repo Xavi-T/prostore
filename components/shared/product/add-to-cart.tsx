@@ -1,6 +1,6 @@
 'use client'
 import { Button } from '@/components/ui/button'
-import { addToCart, removeItemFromCart } from '@/lib/actions/cart.action'
+import { addItemToCart, removeItemFromCart } from '@/lib/actions/cart.action'
 import { Cart, CartItem } from '@/types'
 import { Loader, Minus, Plus } from 'lucide-react'
 import { useRouter } from 'next/navigation'
@@ -14,7 +14,7 @@ function AddToCart({ item, cart }: { cart?: Cart; item: CartItem }) {
 
   const handleAddToCart = async () => {
     startTransition(async () => {
-      const res = await addToCart(item)
+      const res = await addItemToCart(item)
 
       if (!res.success) {
         toast.error(res.message)
