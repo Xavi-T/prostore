@@ -20,9 +20,9 @@ export const singUpDefaultValues = {
 }
 
 export const shippingAddressDefaultValues = {
-  fullName: 'Son Tran Van',
-  streetAddress: 'Ha Noi',
-  city: 'Ha Noi',
-  postalCode: '100000',
-  country: 'Viet Nam'
+  fullName: '',
+  streetAddress: '',
+  city: '',
+  postalCode: '',
+  country: ''
 }
