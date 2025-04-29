@@ -1,4 +1,4 @@
-'user server'
+'use server'
 
 import { isRedirectError } from 'next/dist/client/components/redirect-error'
 import { formatErrorMessage } from '../utils'
@@ -59,7 +59,7 @@ export async function createOrder() {
     // Create a transaction to create order and order items in database
     const insertedOrderId = await prisma.$transaction(async (tx) => {
       // Create order
-      const insertedOrder = await tx.order.create({ data: order as any }) // WARNING: cast to any to avoid type error
+      const insertedOrder = await tx.order.create({ data: order }) // WARNING: cast to any to avoid type error
       // Create order items from the cart items
       for (const item of cart.items as CartItem[]) {
         await tx.orderItem.create({
