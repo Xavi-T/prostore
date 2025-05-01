@@ -13,7 +13,6 @@ const PlaceOrderForm = () => {
     event.preventDefault()
 
     const res = await createOrder()
-    console.log('🚀 ~ handleSubmit ~ res:', res)
 
     if (res.redirectTo) {
       router.push(res.redirectTo)
@@ -29,7 +28,7 @@ const PlaceOrderForm = () => {
         ) : (
           <Check className="h-4 w-4" />
         )}{' '}
-        Place Ordermmm
+        Place Order
       </Button>
     )
   }

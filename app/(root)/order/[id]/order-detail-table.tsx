@@ -1,6 +1,6 @@
-import { auth } from '@/auth'
-import CheckoutSteps from '@/components/shared/checkout-steps'
-import { Button } from '@/components/ui/button'
+'use client'
+
+import { Badge } from '@/components/ui/badge'
 import { Card, CardContent } from '@/components/ui/card'
 import {
   Table,
@@ -10,68 +10,47 @@ import {
   TableHeader,
   TableRow
 } from '@/components/ui/table'
-import { getMyCart } from '@/lib/actions/cart.action'
-import { getUserById } from '@/lib/actions/user.actions'
-import { formatCurrency } from '@/lib/utils'
-import { ShippingAddress } from '@/types'
-import { Metadata } from 'next'
+import { formatCurrency, formatDateTime, formatId } from '@/lib/utils'
+import { Order } from '@/types'
 import Image from 'next/image'
 import Link from 'next/link'
-import { redirect } from 'next/navigation'
-import PlaceOrderForm from './place-order-form'
 
-export const metadata: Metadata = {
-  title: 'Place Order'
-}
-
-async function PlaceOrderPage() {
-  const cart = await getMyCart()
-  const session = await auth()
-  const userId = session?.user?.id
-
-  if (!userId) throw new Error('User not found!')
-
-  const user = await getUserById(userId)
-
-  if (!cart || cart.items.length === 0) redirect('/cart')
-  if (!user.address) redirect('/shipping-address')
-  if (!user.paymentMethod) redirect('/payment-method')
-
-  const userAddress = user.address as ShippingAddress
-
+function OrderDetailsTable({ order }: { order: Order }) {
   return (
     <>
-      <CheckoutSteps current={3} />
-      <h1 className="py-4 text-2xl">Place Order</h1>
-
+      <h1 className="py-4 text-2xl">Order {formatId(order.id)}</h1>
       <div className="grid md:grid-cols-3 md:gap-5">
-        <div className="space-y-4 overflow-x-auto md:col-span-2">
-          <Card>
-            <CardContent className="gap-4 p-4">
-              <h2 className="pb-4 text-xl">Shipping Address</h2>
-              <p>{userAddress.fullName}</p>
-              <p>
-                {userAddress.streetAddress} {userAddress.city}{' '}
-                {userAddress.postalCode} {userAddress.country}
-              </p>
-              <div className="mt-3">
-                <Link href="/shipping-address">
-                  <Button variant={'outline'}>Edit</Button>
-                </Link>
-              </div>
-            </CardContent>
-          </Card>
-
+        <div className="col-span-2 space-y-4 overflow-x-auto">
           <Card>
             <CardContent className="gap-4 p-4">
               <h2 className="pb-4 text-xl">Payment Method</h2>
-              <p>{user.paymentMethod}</p>
-
-              <div className="mt-3">
-                <Link href="/payment-method">
-                  <Button variant={'outline'}>Edit</Button>
-                </Link>
-              </div>
+              <p className="mb-2">{order.paymentMethod}</p>
+              {order.isPaid ? (
+                <Badge variant="secondary">
+                  Paid at {formatDateTime(order.paidAt!).dateTime}
+                </Badge>
+              ) : (
+                <Badge variant="destructive">Not Paid</Badge>
+              )}
+            </CardContent>
+          </Card>
+          <Card className="my-2">
+            <CardContent className="gap-4 p-4">
+              <h2 className="pb-4 text-xl">Shipping Address</h2>
+              <p>{order.shippingAddress.fullName}</p>
+              <p className="mb-2">
+                {order.shippingAddress.streetAddress},{' '}
+                {order.shippingAddress.city}
+                {order.shippingAddress.postalCode},{' '}
+                {order.shippingAddress.country}
+              </p>
+              {order.isDelivered ? (
+                <Badge variant="secondary">
+                  Paid at {formatDateTime(order.deliveredAt!).dateTime}
+                </Badge>
+              ) : (
+                <Badge variant="destructive">Not Delivered</Badge>
+              )}
             </CardContent>
           </Card>
 
@@ -87,7 +66,7 @@ async function PlaceOrderPage() {
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {cart.items.map((item) => (
+                  {order.orderItems.map((item) => (
                     <TableRow key={item.slug}>
                       <TableCell>
                         <Link
@@ -121,22 +100,20 @@ async function PlaceOrderPage() {
             <CardContent className="gap-4 space-y-4 p-4">
               <div className="flex justify-between">
                 <div>Items</div>
-                <div> {formatCurrency(cart.itemsPrice)}</div>
+                <div> {formatCurrency(order.itemsPrice)}</div>
               </div>
               <div className="flex justify-between">
                 <div>Tax</div>
-                <div> {formatCurrency(cart.taxPrice)}</div>
+                <div> {formatCurrency(order.taxPrice)}</div>
               </div>
               <div className="flex justify-between">
                 <div>Shipping</div>
-                <div> {formatCurrency(cart.shippingPrice)}</div>
+                <div> {formatCurrency(order.shippingPrice)}</div>
               </div>
               <div className="flex justify-between">
                 <div>Total</div>
-                <div> {formatCurrency(cart.totalPrice)}</div>
+                <div> {formatCurrency(order.totalPrice)}</div>
               </div>
-
-              <PlaceOrderForm />
             </CardContent>
           </Card>
         </div>
@@ -145,4 +122,4 @@ async function PlaceOrderPage() {
   )
 }
 
-export default PlaceOrderPage
+export default OrderDetailsTable

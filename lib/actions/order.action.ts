@@ -21,17 +21,6 @@ export async function createOrder() {
 
     const user = await getUserById(userId)
 
-    // Create order object
-    const order = insertOrderSchema.parse({
-      userId: user.id,
-      shippingAddress: user.address,
-      paymentMethod: user.paymentMethod,
-      itemsPrice: cart.itemsPrice,
-      shippingPrice: cart.shippingPrice,
-      taxPrice: cart.taxPrice,
-      totalPrice: cart.totalPrice
-    })
-
     if (!cart || cart.items.length === 0) {
       return {
         success: false,
@@ -55,6 +44,17 @@ export async function createOrder() {
         redirectTo: '/payment-method'
       }
     }
+
+    // Create order object
+    const order = insertOrderSchema.parse({
+      userId: user.id,
+      shippingAddress: user.address,
+      paymentMethod: user.paymentMethod,
+      itemsPrice: cart.itemsPrice,
+      shippingPrice: cart.shippingPrice,
+      taxPrice: cart.taxPrice,
+      totalPrice: cart.totalPrice
+    })
 
     // Create a transaction to create order and order items in database
     const insertedOrderId = await prisma.$transaction(async (tx) => {
