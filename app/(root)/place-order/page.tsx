@@ -26,6 +26,7 @@ export const metadata: Metadata = {
 
 async function PlaceOrderPage() {
   const cart = await getMyCart()
+  console.log('🚀 ~ PlaceOrderPage ~ cart:', cart)
   const session = await auth()
   const userId = session?.user?.id
 

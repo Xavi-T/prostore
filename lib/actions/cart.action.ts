@@ -124,11 +124,13 @@ export async function getMyCart() {
   // get session and user id
   const session = await auth()
   const userId = session?.user?.id ? (session.user.id as string) : undefined
+  console.log('🚀 ~ getMyCart ~ userId:', userId)
 
   // get user cart from database
   const cart = await prisma.cart.findFirst({
     where: userId ? { userId: userId } : { sessionCartId: sessionCartId }
   })
+  console.log('🚀 ~ getMyCart ~ cart:', cart)
 
   if (!cart) return undefined
 
