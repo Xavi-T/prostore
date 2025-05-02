@@ -102,7 +102,10 @@ export const config = {
               // delete current user cart
               await prisma.cart.deleteMany({
                 where: {
-                  userId: user.id
+                  userId: user.id,
+                  id: {
+                    not: sessionCart.id
+                  }
                 }
               })
 
