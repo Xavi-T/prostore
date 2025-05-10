@@ -9,7 +9,9 @@ async function CartPage() {
   const cart = await getMyCart()
   return (
     <div>
-      <CartTable cart={cart} />
+      <CartTable
+        cart={cart ? { ...cart, userId: cart.userId ?? undefined } : undefined}
+      />
     </div>
   )
 }

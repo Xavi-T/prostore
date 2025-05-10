@@ -5,7 +5,6 @@ import { Cart, CartItem } from '@/types'
 import { Loader, Minus, Plus } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { useTransition } from 'react'
-import { start } from 'repl'
 import { toast } from 'sonner'
 
 function AddToCart({ item, cart }: { cart?: Cart; item: CartItem }) {
