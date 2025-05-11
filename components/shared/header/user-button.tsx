@@ -50,8 +50,20 @@ async function UserButton() {
               </div>
             </div>
           </DropdownMenuLabel>
+
+          <DropdownMenuItem>
+            <Link href="/user/profile" className="w-full">
+              User Profile
+            </Link>
+          </DropdownMenuItem>
+          <DropdownMenuItem>
+            <Link href="/user/orders" className="w-full">
+              Order History
+            </Link>
+          </DropdownMenuItem>
+
           <DropdownMenuItem className="mb-1 p-0">
-            <form className="w-full" action={signOutUser}>
+            <form action={signOutUser}>
               <Button
                 className="h-4 w-full justify-start px-2 py-4"
                 variant="ghost"
