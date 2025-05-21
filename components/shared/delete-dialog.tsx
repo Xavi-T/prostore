@@ -18,7 +18,8 @@ const DeleteDialog = ({
   action
 }: {
   id: string
-  action: (id: string) => Promise<{ success: boolean; message: string }>
+  //   action: (id: string) => Promise<{ success: boolean; message: string }>
+  action: (id: string) => Promise<{ success: boolean; message: any }>
 }) => {
   const [open, setOpen] = useState(false)
   const [isPending, startTransition] = useTransition()

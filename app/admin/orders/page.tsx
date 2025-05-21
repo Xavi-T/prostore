@@ -11,9 +11,9 @@ import { Metadata } from 'next'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 import Pagination from '@/components/shared/pagination'
-import DeleteDialog from '@/components/shared/delete-dialog'
 import { requireAdmin } from '@/lib/auth-guard'
 import { deleteOrder, getAllOrders } from '@/lib/actions/order.action'
+import DeleteDialog from '@/components/shared/delete-dialog'
 
 export const metadata: Metadata = {
   title: 'Admin Orders'
