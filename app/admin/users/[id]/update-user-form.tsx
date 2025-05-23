@@ -53,6 +53,7 @@ const UpdateUserForm = ({
       form.reset()
       router.push('/admin/users')
     } catch (error) {
+      console.log('🚀 ~ onSubmit ~ error:', error)
       toast.error(
         'Something went wrong while updating the user. Please try again.'
       )
