@@ -117,24 +117,22 @@ export async function addItemToCart(data: CartItem) {
 }
 
 export async function getMyCart() {
-  // check for cart cookies
+  // Check for cart cookie
   const sessionCartId = (await cookies()).get('sessionCartId')?.value
-  if (!sessionCartId) throw new Error('Session cart id not found!')
+  if (!sessionCartId) throw new Error('Cart session not found')
 
-  // get session and user id
+  // Get session and user ID
   const session = await auth()
   const userId = session?.user?.id ? (session.user.id as string) : undefined
-  console.log('🚀 ~ getMyCart ~ userId:', userId)
 
-  // get user cart from database
+  // Get user cart from database
   const cart = await prisma.cart.findFirst({
     where: userId ? { userId: userId } : { sessionCartId: sessionCartId }
   })
-  console.log('🚀 ~ getMyCart ~ cart:', cart)
 
   if (!cart) return undefined
 
-  // convert to plain object
+  // Convert decimals and return
   return convertToPlainObject({
     ...cart,
     items: cart.items as CartItem[],
