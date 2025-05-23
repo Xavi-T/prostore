@@ -23,17 +23,16 @@ export type ShippingAddress = z.infer<typeof shippingAddressSchema>
 export type OrderItem = z.infer<typeof insertOrderItemSchema>
 export type Order = z.infer<typeof insertOrderSchema> & {
   id: string
-  createdAt: Date | null
-  isPaid: boolean
+  createdAt: Date
+  isPaid: Boolean
   paidAt: Date | null
-  isDelivered: boolean
+  isDelivered: Boolean
   deliveredAt: Date | null
   orderItems: OrderItem[]
-  user: {
-    name: string
-    email: string
-  }
+  user: { name: string; email: string }
+  paymentResult: PaymentResult
 }
+
 export type PaymentResult = z.infer<typeof paymentResultSchema>
 
 export type Review = z.infer<typeof insertReviewSchema> & {
