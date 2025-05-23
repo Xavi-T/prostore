@@ -62,3 +62,4 @@ export const reviewFormDefaultValues = {
 }
 
 export const SENDER_EMAIL = process.env.SENDER_EMAIL || 'onboarding@resend.dev'
+export const LIMIT_PRODUCTS = Number(process.env.LIMIT_PRODUCTS) || 8
