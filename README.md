@@ -1,36 +1,84 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Prostore
+
+Prostore is a simple and modern e-commerce platform built with Next.js, Prisma, and PostgreSQL. It features user authentication, product management, cart and order processing, and payment integration.
+
+## Features
+
+- User authentication (NextAuth.js)
+- Product listing, search, and filtering
+- Shopping cart and order management
+- Payment methods: PayPal, Stripe, Cash on Delivery
+- Admin dashboard for managing products, orders, and users
+- Review system for products
+- Responsive and modern UI
+
+## Tech Stack
+
+- **Frontend:** Next.js, React, Tailwind CSS
+- **Backend:** Next.js API routes, Prisma ORM
+- **Database:** PostgreSQL (Neon)
+- **Authentication:** NextAuth.js
+- **Payments:** PayPal, Stripe
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- Node.js (v18+ recommended)
+- PostgreSQL database (Neon or local)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Installation
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. **Clone the repository:**
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+   ```bash
+   git clone <repo-url>
+   cd prostore
+   ```
 
-## Learn More
+2. **Install dependencies:**
 
-To learn more about Next.js, take a look at the following resources:
+   ```bash
+   npm install
+   ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+3. **Configure environment variables:**
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+   - Copy `.env.example` to `.env` and fill in the required values (see `.env` for reference).
 
-## Deploy on Vercel
+4. **Set up the database:**
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+   ```bash
+   npx prisma migrate dev --name init
+   npx prisma db seed
+   ```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+5. **Run the development server:**
+   ```bash
+   npm run dev
+   ```
+   The app will be available at [http://localhost:3000](http://localhost:3000).
+
+## Project Structure
+
+- `app/` - Next.js app directory (pages, layouts, API routes)
+- `components/` - Reusable React components
+- `db/` - Prisma client and seed scripts
+- `lib/` - Utility functions and helpers
+- `prisma/` - Prisma schema and migrations
+- `public/` - Static assets
+- `types/` - TypeScript type definitions
+
+## Scripts
+
+- `npm run dev` - Start the development server
+- `npm run build` - Build for production
+- `npm run start` - Start the production server
+- `npx prisma studio` - Open Prisma Studio (DB GUI)
+- `npx prisma migrate dev` - Run database migrations
+
+## License
+
+This project is for educational purposes. See [Udemy course by Brad Traversy](https://www.udemy.com/course/nextjs-dev-to-deployment/) for more details.
+
+[github-repo](https://github.com/bradtraversy/prostore)
